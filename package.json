@@ -1,8 +1,13 @@
 {
   "name": "swca",
-  "version": "1.0.0",
-  "description": "swca",
+  "version": "0.1.0",
+  "description": "State with Context API",
   "author": "mskoroglu",
+  "keywords": [
+    "react",
+    "state",
+    "context"
+  ],
   "license": "MIT",
   "repository": "mskoroglu/swca",
   "main": "dist/index.js",

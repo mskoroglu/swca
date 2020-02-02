@@ -1,22 +1,26 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
 
-import styles from './styles.css'
+const Context = React.createContext();
+Context.displayName = "SWCA";
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
+const SWCA = props => {
+  if (!props) return React.useContext(Context);
 
-  render() {
-    const {
-      text
-    } = this.props
+  return (
+    <Context.Provider value={createState(props.state)}>
+      {props.children}
+    </Context.Provider>
+  );
+};
 
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+const createState = map =>
+  Object.keys(map).reduce((state, key) => {
+    const [value, setValue] = React.useState(map[key]);
+    const setterName = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+    return Object.assign({}, state, {
+      [key]: value,
+      [setterName]: setValue
+    });
+  }, {});
+
+export default SWCA;
